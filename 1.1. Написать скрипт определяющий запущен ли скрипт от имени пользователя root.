@@ -1,0 +1,6 @@
+#!/bin/sh
+if id -u -eq 0; then
+  echo "Сценарий запущен от имени root"
+else
+  echo "Сценарий запущен не от имени root"
+fi  
