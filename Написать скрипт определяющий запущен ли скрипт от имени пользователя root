@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$EUID" -eq 0 ]; then
+    echo "Этот скрипт запущен под root"
+else
+    echo "Этот скрипт запущен не из под root"
+fi
