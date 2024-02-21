@@ -1,0 +1,4 @@
+#!/bin/sh
+current_date=$(date +"%Y-%m-%d")
+current_time=$(date +"%H:%M:%S")
+echo "$current_date $current_time"
