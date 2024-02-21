@@ -1,6 +1,6 @@
-#!/bin/sh
-if id -u -eq 0; then
-  echo "Сценарий запущен от имени root"
+#!/bin/bash
+if [ "$EUID" -eq 0 ]; then
+    echo "This script is running as root"
 else
-  echo "Сценарий запущен не от имени root"
-fi  
+    echo "This script is not running as root"
+fi
