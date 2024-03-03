@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Введите имя каталога:"
+read directoryPath
+if [ -d "$directoryPath" ]; then
+    echo "Файлы в каталоге $directoryPath:"
+    ls "$directoryPath"
+else
+    echo "Ошибка, такого каталога не существует"
+fi
