@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Введите имя каталога:"
+read directoryPath
+echo "Файлы в каталоге ${directoryPath}:"
+ls ${directoryPath}
