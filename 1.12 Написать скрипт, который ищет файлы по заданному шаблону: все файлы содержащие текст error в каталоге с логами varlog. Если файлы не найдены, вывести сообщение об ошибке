@@ -5,5 +5,5 @@ ERROR_PATTERN="error"
 
 find "${LOG_DIR}" -type f -name "*.log" -exec grep -l "${ERROR_PATTERN}" {} \;
 if [ $? -ne 0 ]; then
-	echo "No files found with error pattern in ${LOG_DIR}"
+	echo "Не найдено файлов в директории ${LOG_DIR} с тестом error"
 fi
