@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Введите имя файла:"
+read fileName
+if [ -f "$fileName" ]; then
+    echo "Содержимое файла $fileName"
+    cat "$fileName"
+else
+    echo "Ошибка, файла с таким именем не существует"
+fi
