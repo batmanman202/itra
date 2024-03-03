@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Получить название файла
+echo "Enter filename: "
+read filename
+
+# Проверка существования файла
+if [ ! -f "${filename}" ]; then
+   echo "File ${filename} not found!" 
+   else
+# Создание копии файла
+tmpfile="${filename}.tmp"
+cp "${filename}" "${tmpfile}"
+
+# Замена "error" на "warning"
+    while read -r line; do
+     new_line="$(echo "${line}" | sed  's/error/warning/')"
+     echo "${new_line}"
+    done < "${tmpfile}" > "${filename}"
+
+# Удалить копию файла
+rm "${tmpfile}"
+fi
