@@ -1,0 +1,48 @@
+#!/bin/bash
+
+current_date=$(date +"%Y-%m-%d")
+current_time=$(date +"%H:%M:%S")
+space=$(df -H | grep /dev/)
+sizeSDA3=$(df | grep /dev/sda3 | awk ' {print $4} ')
+
+echo "Скрипт был запущен $current_date $current_time" >>~/Desktop/log.txt
+echo "$space
+--
+Оставшееся место на отслеживаемом диске $sizeSDA3 байт
+--
+"
+function disk_analysis() {
+#Предупрреждение о нехватке свободного места в файл\ на почту
+if (( $(bc <<< "$sizeSDA3 <= 100000000") == 1 ));
+then
+echo "$current_date $current_time" >>~/Desktop/alarm.txt
+         
+echo "Осталось всего ${sizeSDA3} байт свободного места
+--" >> ~/Desktop/alarm.txt
+
+mail -s "Заканчивает место на 1 из дисков" -f ~/Desktop/alarm.txt email@address.com 
+else
+ echo "Место на диске еще не заканчивается"
+fi
+}
+function disk_clener {
+#Запрос на удаление устаревших файлов
+echo "Будем ли мы удалять временные\устаревшие файлы?
+Y- удаляем, любой другой ответ - Нет"
+read deleteFile
+if [ $deleteFile == Y ]
+then 
+#Удаляем файлы старше 300 минут
+find . -mmin +300 -exec rm -f {} \;
+for file in `find . -mmin +1`; do
+    echo "$(date '+%F %T'): Удален: $file"
+done >> ~/Desktop/log.txt
+#Удаляем временные файлы
+find /tmp -name '*.tmp' -exec rm -f {} \;
+for file in `find /tmp -name '*.tmp' `; do
+    echo "$(date '+%F %T'): Удален: $file"
+done >> ~/Desktop/log.txt
+else
+end
+fi
+}
